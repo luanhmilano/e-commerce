@@ -51,8 +51,13 @@ function App() {
       <div className="container">
         <Routes>
           <Route path='/' element={<Catalog onAddToCart={handleAddCart} />} />
-          <Route path='/cart' element={<Cart carItems={carItems} onUpdateCart={handleUpdateCart} onRemoveFromCart={handleRemoveFromCart} onCheckout={() => {
-            
+          <Route path='/cart' element={<Cart carItems={carItems} onUpdateCart={handleUpdateCart} onRemoveFromCart={handleRemoveFromCart} setCarItems={setCarItems} onCheckout={() => {
+            if(carItems.length > 0) {
+              toast.success("Compra finalizada com sucesso!")
+              setCarItems([])
+            } else {
+              toast.error("Seu carrinho está vazio.")
+            }
           }} />} />
           <Route path='/thank-you' element={<ThankYouPage />} />
         </Routes>
